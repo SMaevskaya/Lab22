@@ -1,5 +1,6 @@
 import dao.UserDao;
 import models.User;
+import services.UserService;
 import utils.HibernateUtil;
 
 import java.text.DateFormat;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final UserDao userDAO = new UserDao();
+    private static final UserService userService = new UserService();
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -85,7 +86,7 @@ public class Main {
 
 
         User user = new User(name, email, age, new java.sql.Date(created_at.getTime()) );
-        Integer userId = userDAO.saveUser(user);
+        Integer userId = userService.saveUser(user);
 
         if (userId != null) {
             System.out.println("User created successfully with ID: " + userId);
@@ -96,7 +97,7 @@ public class Main {
 
     private static void showAllUsers() {
         System.out.println("\n--- All Users ---");
-        List<User> users = userDAO.getAllUsers();
+        List<User> users = userService.getAllUsers();
 
         if (users != null && !users.isEmpty()) {
             for (User user : users) {
@@ -110,10 +111,10 @@ public class Main {
     private static void findUserById() {
         System.out.println("\n--- Find User by ID ---");
         System.out.print("Enter user ID: ");
-        Long userId = scanner.nextLong();
+        int userId = scanner.nextInt();
         scanner.nextLine(); // очистка буфера
 
-        User user = userDAO.getUserById(userId);
+        User user = userService.getUserById(userId);
         if (user != null) {
             System.out.println("User found: " + user);
         } else {
@@ -124,10 +125,10 @@ public class Main {
     private static void updateUser() {
         System.out.println("\n--- Update User ---");
         System.out.print("Enter user ID to update: ");
-        Long userId = scanner.nextLong();
+        int userId = scanner.nextInt();
         scanner.nextLine(); // очистка буфера
 
-        User user = userDAO.getUserById(userId);
+        User user = userService.getUserById(userId);
         if (user == null) {
             System.out.println("User not found with ID: " + userId);
             return;
@@ -153,7 +154,7 @@ public class Main {
             user.setAge(age);
         }
 
-        boolean success = userDAO.updateUser(user);
+        boolean success = userService.updateUser(user);
         if (success) {
             System.out.println("User updated successfully.");
         } else {
@@ -164,10 +165,10 @@ public class Main {
     private static void deleteUser() {
         System.out.println("\n--- Delete User ---");
         System.out.print("Enter user ID to delete: ");
-        Long userId = scanner.nextLong();
+        int userId = scanner.nextInt();
         scanner.nextLine(); // очистка буфера
 
-        boolean success = userDAO.deleteUserById(userId);
+        boolean success = userService.deleteUserById(userId);
         if (success) {
             System.out.println("User deleted successfully.");
         } else {

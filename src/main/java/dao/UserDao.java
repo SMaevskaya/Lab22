@@ -36,7 +36,7 @@ public class UserDao {
 
 
     // READ
-    public User getUserById(Long id) {
+    public User getUserById(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.find(User.class, id);
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class UserDao {
 
 
     // DELETE
-    public boolean deleteUserById(Long id) {
+    public boolean deleteUserById(int id) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
