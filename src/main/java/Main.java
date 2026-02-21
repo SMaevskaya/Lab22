@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final UserService userService = new UserService();
+    private static final UserDao userDao=new UserDao();
+    private static final UserService userService = new UserService(userDao);
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {

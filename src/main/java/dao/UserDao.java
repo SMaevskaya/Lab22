@@ -7,10 +7,6 @@ import utils.HibernateUtil;
 import java.util.List;
 
 public class UserDao {
-    public User findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().
-                find(User.class, id);
-    }
 
     // CREATE
     public Integer saveUser(User user) {

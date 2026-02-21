@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name="userr")
@@ -77,3 +78,4 @@ public class User {
         return "Id="+id+ " Name="+name+" Email="+email+" Age="+age+" created_at="+created_at;
   }
 }
+

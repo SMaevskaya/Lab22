@@ -7,30 +7,31 @@ import java.util.List;
 
 public class UserService {
 
-    private final UserDao usersDao = new UserDao();
+    private final UserDao userDao;
 
-    public UserService() {
+    public UserService(UserDao userDao) {
+        this.userDao=userDao;
     }
 
     public User getUserById(int id) {
-        return usersDao.getUserById(id);
+        return userDao.getUserById(id);
     }
 
     public Integer saveUser(User user) {
-        return usersDao.saveUser(user);
+        return userDao.saveUser(user);
 
     }
 
     public boolean deleteUserById(int userId) {
-       return usersDao.deleteUserById(userId);
+       return userDao.deleteUserById(userId);
     }
 
     public boolean updateUser(User user) {
-       return usersDao.updateUser(user);
+       return userDao.updateUser(user);
     }
 
     public List<User> getAllUsers() {
-        return usersDao.getAllUsers();
+        return userDao.getAllUsers();
     }
 
 }
