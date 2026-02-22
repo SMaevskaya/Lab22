@@ -6,16 +6,14 @@ import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @Testcontainers
 public class UserDaoTest {
 
     @Container
-    private static final PostgreSQLContainer
+    private static final PostgreSQLContainer<?>
             postgres = new PostgreSQLContainer<>("postgres:15")
             .withDatabaseName("mydb")
             .withUsername("postgres")
@@ -47,7 +45,7 @@ public class UserDaoTest {
     }
 
     @Test
-    void testSaveUser() {
+     void testSaveUser() {
         User testUser = new User ("Vasya","vasya@mail.ru",23,new Date(2025,12,11));
         Integer id=userDao.saveUser(testUser);
         User foundUser = userDao.getUserById(id);

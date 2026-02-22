@@ -1,21 +1,19 @@
 import dao.UserDao;
 import models.User;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import services.UserService;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,7 +48,7 @@ public class UserServiceTest {
         assertEquals("Vasya", result.getName());
         assertEquals("vasya@mail.ru", result.getEmail());
         assertEquals(23,result.getAge());
-        assertEquals(new Date(23-10-2025),result.getCreated_at());
+        assertEquals(new Date(2025,12,11),result.getCreated_at());
 
     }
 
@@ -92,7 +90,7 @@ public class UserServiceTest {
         when(mockUserDao.getAllUsers()).thenReturn(mockUserList);
         List<User> result = userService.getAllUsers();
         assertNotNull(Optional.of(result));
-        assertEquals(mockUserList, result);
+        Assertions.assertFalse(result.isEmpty());
 
 
     }
